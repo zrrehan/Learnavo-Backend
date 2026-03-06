@@ -11,7 +11,7 @@ const postTutorProfile = async(req: Request, res: Response) => {
         const result = await tutorServices.postTutorProfile(req.user, req.body);
         res.send(result);
     } catch(error: any) {
-        ErrorFunc(res, 403, error.message)
+        ErrorFunc(res, 403, error)
     }
 }
 
@@ -20,7 +20,7 @@ const deleteTime = async(req: Request, res: Response) => {
         const result = await tutorServices.deleteTime(req.body.id as string);
         res.send(result);
     } catch(error: any) {
-        ErrorFunc(res, 403, error.message)
+        ErrorFunc(res, 403, error)
     }
 }
 

@@ -1,8 +1,21 @@
 import { Response } from "express";
 
-export function ErrorFunc(res: Response, status: number, message: string) {
+const errorMssg = (error: any) => {
+    let message = "";
+    if(error?.code === "P2025") {
+        message = "Invalid input"
+    }
+
+    if(message === "") {
+        message = error.message
+    }
+
+    return message;
+}
+
+export function ErrorFunc(res: Response, status: number, error: any) {
     return res.status(status).send({
         success: false,
-        message: message
+        message: errorMssg(error)
     });
 }
