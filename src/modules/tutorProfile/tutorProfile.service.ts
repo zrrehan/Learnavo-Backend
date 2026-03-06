@@ -33,6 +33,18 @@ const postTutorProfile = async (user: any, payload: PostTutorProfilePayload) => 
     }
 }
 
+const deleteTime = async(id: string) => {
+    return {
+        success: true, 
+        deletedData: await prisma.availableTime.delete({
+            where: {
+                id: id
+            }
+        })
+    }
+}
+
 export const tutorServices = {
-    postTutorProfile
+    postTutorProfile, 
+    deleteTime,
 }

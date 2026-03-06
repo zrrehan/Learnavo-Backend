@@ -15,7 +15,18 @@ const postTutorProfile = async(req: Request, res: Response) => {
     }
 }
 
+const deleteTime = async(req: Request, res: Response) => {
+    try {
+        const result = await tutorServices.deleteTime(req.body.id as string);
+        res.send(result);
+    } catch(error: any) {
+        ErrorFunc(res, 403, error.message)
+    }
+}
+
+
 export const tutorProfileController = {
     getTutor, 
-    postTutorProfile
+    postTutorProfile, 
+    deleteTime,
 }
