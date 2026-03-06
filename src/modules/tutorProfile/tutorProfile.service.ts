@@ -1,14 +1,15 @@
+import { User } from "../../../generated/prisma/client"
 import { prisma } from "../../../lib/prisma"
 import { AvailableTimeType, PostTutorProfilePayload } from "../../types/tutorProfile.type"
 
 
 
-const postTutorProfile = async (payload: PostTutorProfilePayload) => {
+const postTutorProfile = async (user: any, payload: PostTutorProfilePayload) => {
     const profile = await prisma.tutorProfile.create({
         data: {
             ratingSum: 0, 
             ratingCount: 0, 
-            userId: payload.userId
+            userId: user.id
         }
     })
 
@@ -24,8 +25,11 @@ const postTutorProfile = async (payload: PostTutorProfilePayload) => {
     })
 
     return {
-        ...profile, 
-        ...availableTime
+        success: true, 
+        data: {
+            ...profile, 
+            totalAvilableTime: availableTime.count
+        }
     }
 }
 
