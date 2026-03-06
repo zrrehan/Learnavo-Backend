@@ -1,0 +1,38 @@
+model TutorProfile {
+    id String @id @default(uuid())
+    ratingSum Int
+    ratingCount Int 
+    reviews Review[]
+    availableTimes AvailableTime[]
+    userId String // need to connect with User model 
+}
+
+model Review {
+    id String @id @default(uuid())
+    content String 
+
+    tutorProfile TutorProfile @relation(fields: [tutorProfileId], references: [id])
+    tutorProfileId String 
+    studentId String // need to connect with stundent model
+}
+
+
+model AvailableTime {
+    id String @id @default(uuid())
+    day Days 
+    startTime String
+    endTime String 
+
+    tutorProfile TutorProfile @relation(fields: [tutorProfileId], references: [id])
+    tutorProfileId String 
+}
+
+enum Days {
+    SUNDAY
+    MONDAY
+    TUESDAY 
+    WEDNESDAY 
+    THURSDAY 
+    FRIDAY 
+    SATURDAY 
+}
