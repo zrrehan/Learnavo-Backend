@@ -6,6 +6,10 @@ const errorMssg = (error: any) => {
         message = "Invalid input"
     }
 
+    if(error?.code === "P2002") {
+        message = "Duplicate Value";
+    }
+
 
     if(message === "") {
         message = error.message
