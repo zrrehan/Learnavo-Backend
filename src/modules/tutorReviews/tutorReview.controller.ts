@@ -14,6 +14,21 @@ const postTutorReview = async(req: Request, res: Response) => {
     }
 }
 
+
+const getTutorReview = async(req: Request, res: Response) => {
+    try {
+        const {id} = req.query;
+        const result = await tutorReviewServices.getTutorReview(id as string);
+        res.status(201).send({
+            success: true, 
+            result: result
+        });
+    } catch(error: any) {
+        ErrorFunc(res, 400, error);
+    }
+}
+
 export const tutorReviewController = {
-    postTutorReview
+    postTutorReview, 
+    getTutorReview
 }
