@@ -8,5 +8,5 @@ const router = Router();
 router.get("/get-profile", tutorProfileController.getTutor)
 router.post("/post-profile", authMiddleware(UserRoles.tutor), tutorProfileController.postTutorProfile)
 router.delete("/delete-time", authMiddleware(UserRoles.tutor), tutorProfileController.deleteTime)
-
+router.put("/add-time", authMiddleware(UserRoles.tutor), tutorProfileController.updateProfile);
 export const tutorProfileRouter = router; 

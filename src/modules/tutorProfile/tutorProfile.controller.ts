@@ -15,6 +15,16 @@ const postTutorProfile = async(req: Request, res: Response) => {
     }
 }
 
+const updateProfile = async(req: Request, res: Response) => {
+    try {
+        const {profileId, updateData} = req.body;
+        const result = await tutorServices.updateTime(profileId, updateData)
+        res.send(result);
+    } catch (error: any) {
+        ErrorFunc(res, 400, error);
+    }
+}
+
 const deleteTime = async(req: Request, res: Response) => {
     try {
         const result = await tutorServices.deleteTime(req.body.id as string);
@@ -29,4 +39,5 @@ export const tutorProfileController = {
     getTutor, 
     postTutorProfile, 
     deleteTime,
+    updateProfile
 }

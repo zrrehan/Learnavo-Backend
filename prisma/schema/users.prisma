@@ -11,6 +11,9 @@ model User {
   sessions      Session[]
   accounts      Account[]
 
+  tutorProfile TutorProfile?
+  studentProfile StudentProfile?
+
   @@unique([email])
   @@map("user")
 }

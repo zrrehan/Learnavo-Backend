@@ -4,7 +4,13 @@ model TutorProfile {
     ratingCount Int 
     reviews Review[]
     availableTimes AvailableTime[]
-    userId String // need to connect with User model 
+    featured Boolean @default(false)
+    
+    user User @relation(fields: [userId], references: [id])
+    userId String @unique
+
+    tuitionSession TuitionSession[]
+
 }
 
 model Review {

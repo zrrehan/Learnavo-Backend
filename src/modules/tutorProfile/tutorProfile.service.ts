@@ -5,6 +5,16 @@ import { AvailableTimeType, PostTutorProfilePayload } from "../../types/tutorPro
 
 
 const postTutorProfile = async (user: any, payload: PostTutorProfilePayload) => {
+    const oldProfile = await prisma.tutorProfile.findUnique({
+        where: {
+            userId: user.id
+        }
+    })
+
+    if(oldProfile) {
+        throw new Error("Tutor profile already do exist");
+    }
+    
     const profile = await prisma.tutorProfile.create({
         data: {
             ratingSum: 0, 
@@ -33,6 +43,24 @@ const postTutorProfile = async (user: any, payload: PostTutorProfilePayload) => 
     }
 }
 
+
+const updateTime = async(tutorProfileId: string, payload: any) => {
+    let availableTimeData = payload.map((singleTime: AvailableTimeType) => {
+        return {
+            ...singleTime, 
+            tutorProfileId: tutorProfileId
+        }
+    })
+    console.log(availableTimeData)
+    
+    const availableTime = await prisma.availableTime.createMany({
+        data: availableTimeData, 
+        skipDuplicates: true
+    })
+
+    return availableTime;
+}
+
 const deleteTime = async(id: string) => {
     return {
         success: true, 
@@ -47,4 +75,5 @@ const deleteTime = async(id: string) => {
 export const tutorServices = {
     postTutorProfile, 
     deleteTime,
+    updateTime,
 }

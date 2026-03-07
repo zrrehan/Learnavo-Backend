@@ -2,9 +2,10 @@ import { Response } from "express";
 
 const errorMssg = (error: any) => {
     let message = "";
-    if(error?.code === "P2025") {
+    if(error?.code === "P2025" || error?.code === "P2003") {
         message = "Invalid input"
     }
+
 
     if(message === "") {
         message = error.message

@@ -1,0 +1,11 @@
+model TuitionSession {
+    id String @id @default(uuid())
+    completed Boolean @default(false)
+    time String @unique
+    
+    studentId String
+    studentProfile StudentProfile @relation(fields: [studentId], references: [id])
+    
+    tutorId String
+    tutorProfile TutorProfile @relation(fields: [tutorId], references: [id])
+}
