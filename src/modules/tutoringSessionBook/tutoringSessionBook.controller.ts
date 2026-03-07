@@ -29,7 +29,10 @@ const studentCreateProfile = async (req: Request, res: Response) => {
 const getTuitionSession = async(req: Request, res: Response) => {
     try {
         const result = await tutoringSessionBookService.getTuitionSession(req?.user?.role as string, req?.user?.id as string);
-        res.send(result);
+        res.status(201).send({
+            success: true, 
+            result: result
+        })
     } catch(error: any) {
         ErrorFunc(res, 400, error)
     }
