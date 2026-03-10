@@ -5,7 +5,10 @@ model TutorProfile {
     reviews Review[]
     availableTimes AvailableTime[]
     featured Boolean @default(false)
-    
+    subjects String[] @default([])
+    category String @default("offline")
+    price Int @default(5)
+
     user User @relation(fields: [userId], references: [id])
     userId String @unique
 

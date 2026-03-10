@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { adminServices } from "./admin.service";
-import { ErrorFunc } from "../utils/ErrorFunc";
+import { ErrorFunc } from "../../utils/ErrorFunc";
 
 const getAllUser = async (req: Request, res: Response) => {
     try {
