@@ -1,4 +1,3 @@
-
 model User {
   id            String    @id
   name          String
@@ -8,6 +7,7 @@ model User {
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
   roles         String
+  isBan         Boolean @default(false)
   sessions      Session[]
   accounts      Account[]
 
