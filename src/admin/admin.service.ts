@@ -15,7 +15,25 @@ const banUser = async(userId: string, isBan: boolean) => {
     })
 }
 
+const getAllBookings = async() => {
+    return prisma.tuitionSession.findMany({
+        include: {
+            tutorProfile: {
+                include: {
+                    user: true
+                }
+            }, 
+            studentProfile: {
+                include: {
+                    user: true
+                }
+            },
+        }
+    });
+}
+
 export const adminServices = {
     getAllUser, 
-    banUser
+    banUser, 
+    getAllBookings
 }

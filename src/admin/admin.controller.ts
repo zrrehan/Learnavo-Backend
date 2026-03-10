@@ -27,7 +27,20 @@ const banUser = async(req: Request, res: Response) => {
     }
 }
 
+const getAllBookings = async(req: Request, res: Response) => {
+    try {
+        const result = await adminServices.getAllBookings();
+        res.status(200).send({
+            success: true, 
+            result: result
+        })
+    } catch(error: any) {
+        ErrorFunc(res, 400, error);
+    }
+}
+
 export const adminController = {
     getAllUser, 
-    banUser
+    banUser, 
+    getAllBookings
 }
