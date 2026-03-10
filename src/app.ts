@@ -6,6 +6,7 @@ import { auth } from '../lib/auth';
 import { tutorSessionBookRouter } from './modules/tutoringSessionBook/tutoringSessionBook.router';
 import { tutorReviewRouter } from './modules/tutorReviews/tutorReview.router';
 import { adminRouter } from './modules/admin/admin.router';
+import { publicRouter } from './modules/public/public.router';
 export const app = express()
 export const port = process.env.PORT
 
@@ -17,6 +18,8 @@ app.use("/tutor-profile", tutorProfileRouter)
 app.use("/book-session", tutorSessionBookRouter);
 app.use("/tutor-review", tutorReviewRouter);
 app.use("/admin-features", adminRouter);
+app.use("/public-features", publicRouter);
+
 app.get('/', (req: Request, res: Response) => {
     res.send({
         success: true, 
