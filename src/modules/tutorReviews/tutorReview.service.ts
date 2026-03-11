@@ -30,7 +30,7 @@ const postTutorReview = async(student: any, payload: any) => {
         data: {
             content: payload.content, 
             tutorProfileId: payload.tutorProfileId, 
-            studentId: student.id
+            studentUserId: student.id
         }
     })
     }

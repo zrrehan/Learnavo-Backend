@@ -1,4 +1,4 @@
-import { gte } from "better-auth";
+import { gte, includes } from "better-auth";
 import { prisma } from "../../../lib/prisma"
 
 const getDetailedTutorProfile = async (featured: boolean) => {
@@ -84,7 +84,15 @@ const tutorBrowse = async (input: any) => {
             }, 
             include: {
                 user: true, 
-                reviews: true,
+                reviews: {
+                    include: {
+                        studentId: {
+                            include: {
+                                user: true
+                            }
+                        }
+                    }
+                },
             }
         });
     } 

@@ -22,7 +22,9 @@ model Review {
 
     tutorProfile TutorProfile @relation(fields: [tutorProfileId], references: [id])
     tutorProfileId String 
-    studentId String // need to connect with stundent model
+
+    studentUserId String?
+    studentId StudentProfile? @relation(fields: [studentUserId], references: [userId])
 }
 
 
