@@ -1,12 +1,15 @@
 import { Review } from "../../../generated/prisma/client"
 import { prisma } from "../../../lib/prisma"
 
-const postTutorReview = async(payload: any) => {
+const postTutorReview = async(student: any, payload: any) => {
     const data = await prisma.review.findMany({
         where: {
-            studentId: payload?.studentId
+            studentId: student.id, 
+            tutorProfileId: payload?.tutorProfileId
         }
     })
+
+
     if(data.length !== 0) {
         return {
             message: "You already gave review"
@@ -27,7 +30,7 @@ const postTutorReview = async(payload: any) => {
         data: {
             content: payload.content, 
             tutorProfileId: payload.tutorProfileId, 
-            studentId: payload.studentId
+            studentId: student.id
         }
     })
     }

@@ -4,7 +4,8 @@ import { tutorReviewServices } from "./tutorReview.service";
 
 const postTutorReview = async(req: Request, res: Response) => {
     try {
-        const result = await tutorReviewServices.postTutorReview(req.body);
+        const student = req.user;
+        const result = await tutorReviewServices.postTutorReview(student, req.body);
         res.status(201).send({
             success: true, 
             result: result
