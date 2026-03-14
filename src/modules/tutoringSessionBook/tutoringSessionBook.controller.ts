@@ -38,8 +38,22 @@ const getTuitionSession = async(req: Request, res: Response) => {
     }
 }
 
+const markCompleteSession = async(req: Request, res: Response) => {
+    try {
+        const sessionId = req.query.sessionId as string;
+        const result = await tutoringSessionBookService.markCompleteSession(sessionId);
+        res.status(201).send({
+            success: true, 
+            result: result
+        })
+    } catch(error: any) {
+        ErrorFunc(res, 400, error)
+    }
+}
+
 export const tutoringSessionBookController = {
     studentBookSession, 
     studentCreateProfile,
-    getTuitionSession
+    getTuitionSession, 
+    markCompleteSession
 }

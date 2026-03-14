@@ -7,5 +7,6 @@ const router = Router();
 // router.get("/", )
 router.post("/book-session", authMiddleware("student"), tutoringSessionBookController.studentBookSession);
 router.post("/create-student-profile",authMiddleware("student") ,tutoringSessionBookController.studentCreateProfile);
-router.get("/get-tuition-sessions", authMiddleware("student", "teacher"), tutoringSessionBookController.getTuitionSession);
+router.get("/get-tuition-sessions", authMiddleware("student", "tutor"), tutoringSessionBookController.getTuitionSession);
+router.put("/mark-complete", authMiddleware("tutor"), tutoringSessionBookController.markCompleteSession);
 export const tutorSessionBookRouter = router;

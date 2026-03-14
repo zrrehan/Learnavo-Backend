@@ -30,6 +30,13 @@ const getTuitionSession = async (role: string, id: string) => {
         return await prisma.tuitionSession.findMany({
             where: {
                 studentId: result?.id || ""
+            }, 
+            include: {
+                tutorProfile: {
+                    include: {
+                        user: true
+                    }
+                }
             }
         })
     } else if(role === "tutor") {
@@ -42,13 +49,32 @@ const getTuitionSession = async (role: string, id: string) => {
         return await prisma.tuitionSession.findMany({
             where: {
                 tutorId: result?.id || ""
+            }, 
+            include: {
+                studentProfile: {
+                    include: {
+                        user: true
+                    }
+                }
             }
         })
     }
 }
 
+const markCompleteSession = async(sessionId: string) => {
+    return await prisma.tuitionSession.update({
+        where: {
+            id: sessionId
+        }, 
+        data: {
+            completed: true
+        }
+    })
+}
+
 export const tutoringSessionBookService = {
     studentBookSession, 
     studentCreateProfile, 
-    getTuitionSession
+    getTuitionSession, 
+    markCompleteSession,
 }

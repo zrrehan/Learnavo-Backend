@@ -2,19 +2,19 @@ import { Review } from "../../../generated/prisma/client"
 import { prisma } from "../../../lib/prisma"
 
 const postTutorReview = async(student: any, payload: any) => {
-    const data = await prisma.review.findMany({
-        where: {
-            studentId: student.id, 
-            tutorProfileId: payload?.tutorProfileId
-        }
-    })
+    // const data = await prisma.review.findMany({
+    //     where: {
+    //         studentId: student.id, 
+    //         tutorProfileId: payload?.tutorProfileId
+    //     }
+    // })
 
 
-    if(data.length !== 0) {
-        return {
-            message: "You already gave review"
-        }
-    }
+    // if(data.length !== 0) {
+    //     return {
+    //         message: "You already gave review"
+    //     }
+    // }
     await prisma.tutorProfile.update({
         where: {
             id: payload.tutorProfileId

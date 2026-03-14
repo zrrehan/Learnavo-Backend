@@ -11,6 +11,7 @@ const postTutorReview = async(req: Request, res: Response) => {
             result: result
         });
     } catch(error: any) {
+        console.log(error);
         ErrorFunc(res, 400, error);
     }
 }

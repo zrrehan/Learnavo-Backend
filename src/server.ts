@@ -2,7 +2,6 @@
 import { prisma } from '../lib/prisma';
 import { app, port } from './app';
 
-
 async function main() {
     try {
         app.listen(port, () => {
@@ -15,4 +14,7 @@ async function main() {
     }
 }
 
-main()
+main().catch((err) => {
+    console.error('Unhandled error in main:', err);
+    process.exit(1);
+});
